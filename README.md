@@ -18,8 +18,8 @@ Usage
         call mobile_detect;
 
         if (req.http.X-Mobile-Category) {
-            std.log("Mobile category: " + req.http.X-Mobile-Category)
-            std.log("Mobile type: " + req.http.X-Mobile-Type)
+            std.log("Mobile category: " + req.http.X-Mobile-Category);
+            std.log("Mobile type: " + req.http.X-Mobile-Type);
         }
     }
     ```
