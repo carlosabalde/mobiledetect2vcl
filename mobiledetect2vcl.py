@@ -21,6 +21,7 @@ import json
 import datetime
 
 LOCATION = 'https://raw.github.com/serbanghita/Mobile-Detect/master/Mobile_Detect.json'
+CATEGORIES = ['phones', 'tablets', 'os', 'browsers', 'utilities']
 SUBROUTINE = 'mobile_detect'
 CATEGORY = 'X-Mobile-Category'
 TYPE = 'X-Mobile-Type'
@@ -47,8 +48,8 @@ def main(location, subroutine_name, category_header, type_header):
 
     # Build rules.
     rules = []
-    for category, types in db['uaMatch'].items():
-        for type, regexp in types.items():
+    for category in CATEGORIES:
+        for type, regexp in db['uaMatch'].get(category, {}).items():
             rule = '(req.http.User-Agent ~ {"%s"}) {\n' % regexp
             rule += '\t\tset req.http.%(header)s = "%(value)s";\n' % {
                 'header': category_header,
