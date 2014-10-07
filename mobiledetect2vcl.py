@@ -87,7 +87,7 @@ sub %(subroutine)s {
             'subroutine': subroutine_name,
             'category_header': category_header,
             'type_header': type_header,
-            'categories': ', '.join(db['uaMatch'].keys()),
+            'categories': ', '.join(CATEGORIES),
             'location': location,
             'version': db['version'],
             'rules': '\t} elsif '.join(rules),

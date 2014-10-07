@@ -24,7 +24,7 @@ Usage
     }
     ```
 
-3. Use the `X-Mobile-Category` (e.g. 'phones', 'browsers', 'tablets' or 'os') and `X-Mobile-Type` (e.g. 'iPhone', 'BlackBerry', 'iPad', etc.) HTTP headers in the `req` object as you wish. Some ideas:
+3. Use the `X-Mobile-Category` (e.g. 'phones', 'browsers', 'tablets', 'os' or 'utilities') and `X-Mobile-Type` (e.g. 'iPhone', 'BlackBerry', 'iPad', etc.) HTTP headers in the `req` object as you wish. Some ideas:
     - Redirect mobile users to a different location.
     - Normalize the UA header using the device category / type.
     - Forward mobile requests to a specific backend.
