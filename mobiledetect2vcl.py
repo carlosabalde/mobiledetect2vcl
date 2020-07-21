@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 '''
@@ -12,11 +12,11 @@ for a detailed description and other useful information.
 :license: GPL, see LICENSE.txt for more details.
 '''
 
-from __future__ import absolute_import
+
 import sys
 import re
 import argparse
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import json
 import datetime
 
@@ -33,7 +33,7 @@ def load(location):
 
     '''
     if re.match(r'^https?://', location):
-        fp = urllib2.urlopen(location, {}, TIMEOUT)
+        fp = urllib.request.urlopen(location, {}, TIMEOUT)
         assert(fp.getcode() == 200)
     else:
         fp = open(location, 'r')
@@ -49,7 +49,7 @@ def main(location, subroutine_name, category_header, type_header):
     # Build rules.
     rules = []
     for category in CATEGORIES:
-        for type, regexp in db['uaMatch'].get(category, {}).items():
+        for type, regexp in list(db['uaMatch'].get(category, {}).items()):
             rule = '(req.http.User-Agent ~ {"%s"}) {\n' % regexp
             rule += '\t\tset req.http.%(header)s = "%(value)s";\n' % {
                 'header': category_header,
