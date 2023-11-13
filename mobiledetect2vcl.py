@@ -50,7 +50,9 @@ def main(location, subroutine_name, category_header, type_header):
     rules = []
     for category in CATEGORIES:
         for type, regexp in list(db['uaMatch'].get(category, {}).items()):
-            rule = '(req.http.User-Agent ~ {"%s"}) {\n' % regexp
+            if isinstance(regexp, list):
+                regexp = '|'.join(regexp)
+            rule = '(req.http.User-Agent ~ {"(?U)%s"}) {\n' % regexp
             rule += '\t\tset req.http.%(header)s = "%(value)s";\n' % {
                 'header': category_header,
                 'value': category,
